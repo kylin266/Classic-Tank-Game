@@ -9,8 +9,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         MainScreen mainS = new MainScreen();
         primaryStage = mainS.getMainStage();
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
