@@ -1,4 +1,4 @@
-package model.mainScreen;
+package model;
 
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

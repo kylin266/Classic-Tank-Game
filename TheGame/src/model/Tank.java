@@ -1,18 +1,31 @@
 package model;
 
 public enum Tank {
-    BLUE("Assets/resources/tankBlue_outline.png", "Assets/resources/barrelBlue_outline.png", "Assets/resources/life.png"),
-    GREEN("Assets/resources/tankGreen_outline.png", "Assets/resources/barrelGreen_outline.png", "Assets/resources/life.png"),
-    BLACK("Assets/resources/tankBlack_outline.png", "Assets/resources/barrelBlack_outline.png", "Assets/resources/life.png"),
-    RED("Assets/resources/tankRed_outline.png", "Assets/resources/barrelRed_outline.png", "Assets/resources/life.png");
+    BLUE("Assets/resources/BlueBody.png", "Assets/resources/BlueBarrel.png", "Assets/resources/life.png", "Assets/resources/TankBlue.png", "Assets/resources/BlueLabel.png"),
+    BLACK("Assets/resources/BlackBody.png", "Assets/resources/BlackBarrel.png", "Assets/resources/life.png", "Assets/resources/TankBlack.png", "Assets/resources/BlackLabel.png"),
+    RED("Assets/resources/RedBody.png", "Assets/resources/RedBarrel.png", "Assets/resources/life.png", "Assets/resources/TankRed.png", "Assets/resources/RedLabel.png");
     private String bodyPath;
     private String barrelPath;
+    private String tankLogo;
     private String tankLife;
-    Tank(String bodyPath, String barrelPath, String tankLife){
-            this.bodyPath = bodyPath;
-            this.barrelPath = barrelPath;
-            this.tankLife = tankLife;
+    private String tankName;
+
+    Tank(String bodyPath, String barrelPath, String tankLife, String tankLogo, String tankName) {
+        this.bodyPath = bodyPath;
+        this.barrelPath = barrelPath;
+        this.tankLife = tankLife;
+        this.tankLogo = tankLogo;
+        this.tankName = tankName;
     }
 
+    public String getTankLogo() {
+        return tankLogo;
+    }
 
+    public String getTankName() {
+        return tankName;
+    }
+    public String getTankColor(){
+        return bodyPath;
+    }
 }

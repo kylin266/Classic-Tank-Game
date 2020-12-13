@@ -13,7 +13,7 @@ import javafx.scene.layout.BackgroundPosition;
 import javafx.stage.Stage;
 import model.SubScene.CreditScene;
 import model.SubScene.SelectScene;
-import model.mainScreen.MainScreenButton;
+import model.MainScreenButton;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class MainScreen {
      * Elements in screen
      *
      * */
-    List<MainScreenButton> buttonList = new ArrayList<MainScreenButton>();
+    List<MainScreenButton> buttonList = new ArrayList<>();
 
     public MainScreen() {
         mainPane = new AnchorPane();
