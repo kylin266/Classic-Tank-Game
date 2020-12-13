@@ -1,2 +1,2 @@
 # Classic-Tank-Game
-Student OOP final projects
+Student OOP Final Project ( Winter 2020)
