@@ -31,7 +31,6 @@ public class MainScreen {
     private CreditScene creditScene;
     private Stage mainStage;
 
-
     /*
      *  Asset Path and Setting
      *
@@ -142,7 +141,7 @@ public class MainScreen {
     Tank Selecting Scene
      */
     private void createSubScene() {
-        loadingScene = new SelectScene();
+        loadingScene = new SelectScene(mainStage);
         mainPane.getChildren().add(loadingScene);
         creditScene = new CreditScene();
         mainPane.getChildren().add(creditScene);
