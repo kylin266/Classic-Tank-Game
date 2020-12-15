@@ -11,18 +11,22 @@ public class Player {
     private double pos_y = 100;
     private ImageView tankImg;
     private ImageView barrelImg;
+    private Image bulletImg;
     private int speed = 5;
     public Player(Tank tank){
         this.tank = tank;
         createTankImg();
     }
     public void createTankImg(){
-        String bodyPath = tank.getBodyPath();
+        String bodyPath = tank.getTankLogo();
         String barrelPath = tank.getBarrelPath();
+        String bulletPath = tank.getBullet();
         File body =  new File(bodyPath);
         File barrel =  new File(barrelPath);
+        File bullet = new File(bulletPath);
         tankImg = new ImageView(new Image(body.getPath(), 64, 64, false, false));
         barrelImg = new ImageView(new Image(barrel.getPath(), 24, 58, false, false));
+        bulletImg = new Image(bullet.getPath(), 15, 24, false, false);
     }
 
     public ImageView getTankImg() {
@@ -36,4 +40,5 @@ public class Player {
     public int getSpeed() {
         return speed;
     }
+    public Image getBulletImg() { return bulletImg;}
 }

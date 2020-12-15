@@ -1,7 +1,9 @@
 package view;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +14,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Player;
+import model.Sprite;
 import model.Tank;
 
 import java.io.File;
@@ -33,14 +37,19 @@ public class GameScreen {
     /*
      * Animation
      * */
+    private Player p;
     private boolean isLeftKeyPressed;
     private boolean isRightKeyPressed;
     private boolean isUpKeyPressed;
     private boolean isDownKeyPressed;
-    private int angle = 90;
+    private double angle = 0;
     private int speed;
     private ImageView tankImg;
-
+    private Sprite bullet;
+    private double pos_x = 100;
+    private double pos_y = 100;
+    private boolean isFiring = false;
+    private boolean deadType = true;
     public GameScreen() {
         intializeGameStage();
         createPlayerListener();
@@ -64,54 +73,73 @@ public class GameScreen {
 
     private void createPlayer() {
         if (tank != null) {
-            Player p = new Player(tank);
+             p = new Player(tank);
             tankImg = p.getTankImg();
+            tankImg.setX(pos_x);
+            tankImg.setY(pos_y);
             gamePane.getChildren().add(tankImg);
             speed = p.getSpeed();
+
             createGameLoop();
         }
     }
-
+    private void createBullet(){
+            bullet = new Sprite(p.getBulletImg(), tankImg.getX(),tankImg.getY(),"bullet",angle);
+            gamePane.getChildren().add(bullet);
+            bullet.move();
+            bullet.setDead();
+            deadType = bullet.isDead();
+    }
     private void movePlayer() {
-        if (isLeftKeyPressed && !isRightKeyPressed) {
-            System.out.println(angle);
-            if (tankImg.getLayoutX() > 0) {
-                tankImg.setLayoutX(tankImg.getLayoutX() - speed);
-                isLeftKeyPressed = false;
-
-            }
+        if (isFiring) {
+//            fire();
+            createBullet();
         }
-        if (isRightKeyPressed && !isLeftKeyPressed) {
+        if (isLeftKeyPressed && !isRightKeyPressed && !isDownKeyPressed && !isUpKeyPressed) {
+            tankImg.setRotate(-90);
+            angle = tankImg.getRotate();
+            if (tankImg.getX() > 0) {
 
-
-            System.out.println(angle);
-
-            if (tankImg.getLayoutX() < 1300) {
-                tankImg.setLayoutX(tankImg.getLayoutX() + speed);
-                isRightKeyPressed = false;
-
-            }
-        }
-        if (isUpKeyPressed && !isDownKeyPressed) {
-
-            System.out.println(angle);
-
-            if (tankImg.getLayoutY() > 0) {
-                tankImg.setLayoutY(tankImg.getLayoutY() - speed);
-                isUpKeyPressed = false;
+                tankImg.setX(tankImg.getX() - speed);
 
             }
 
         }
-        if (isDownKeyPressed && !isUpKeyPressed) {
+        if (isRightKeyPressed && !isLeftKeyPressed && !isUpKeyPressed && !isDownKeyPressed) {
+            tankImg.setRotate(90);
+            angle = tankImg.getRotate();
 
-            System.out.println(angle);
+            if (angle == 180) {
+                tankImg.setRotate(-90);
+                angle = tankImg.getRotate();
+            }
 
-            if (tankImg.getLayoutY() < 708) {
-                tankImg.setLayoutY(tankImg.getLayoutY() + speed);
-                isDownKeyPressed = false;
+            if (tankImg.getX() < 1240) {
+
+
+                tankImg.setX(tankImg.getX() + speed);
 
             }
+
+        }
+        if (isUpKeyPressed && !isDownKeyPressed && !isLeftKeyPressed && !isRightKeyPressed) {
+            tankImg.setRotate(0);
+            angle = tankImg.getRotate();
+            if (tankImg.getY() > 0) {
+                tankImg.setY(tankImg.getY() - speed);
+
+            }
+
+        }
+        if (isDownKeyPressed && !isUpKeyPressed && !isLeftKeyPressed && !isRightKeyPressed) {
+            tankImg.setRotate(180);
+            angle = tankImg.getRotate();
+            if (tankImg.getY() < 660) {
+                tankImg.setY(tankImg.getY() + speed);
+
+
+            }
+
         }
     }
 
@@ -120,33 +148,68 @@ public class GameScreen {
             @Override
             public void handle(long l) {
                 movePlayer();
+                update();
             }
         };
         gameTimer.start();
     }
-
+    private void update(){
+        gamePane.getChildren().removeIf(n->{
+            if (n.getClass().getName()=="Sprite") {
+                Sprite s = (Sprite) n;
+                return s.isDead();
+            }
+            return false;
+        });
+        isFiring = false;
+    }
 
     private void createPlayerListener() {
         gameScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.SPACE && isFiring == false && !deadType ) {
+                    isFiring = false;
+                }
+                if (keyEvent.getCode() == KeyCode.SPACE && isFiring == false && deadType ) {
+                    isFiring = true;
+                }
                 if (keyEvent.getCode() == KeyCode.LEFT) {
                     isLeftKeyPressed = true;
-                    System.out.println("left" + "current" + angle);
                 }
                 if (keyEvent.getCode() == KeyCode.RIGHT) {
                     isRightKeyPressed = true;
-                    System.out.println("right" + "current" + angle);
                 }
                 if (keyEvent.getCode() == KeyCode.UP) {
                     isUpKeyPressed = true;
-                    System.out.println("up" +  "current" + angle);
                 }
                 if (keyEvent.getCode() == KeyCode.DOWN) {
                     isDownKeyPressed = true;
-                    System.out.println("down" + "current" + angle);
-
                 }
+
+
+            }
+        });
+        gameScene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                if (keyEvent.getCode() == KeyCode.SPACE) {
+                    isFiring = false;
+                }
+                if (keyEvent.getCode() == KeyCode.LEFT) {
+                    isLeftKeyPressed = false;
+                }
+                if (keyEvent.getCode() == KeyCode.RIGHT) {
+                    isRightKeyPressed = false;
+                }
+                if (keyEvent.getCode() == KeyCode.UP) {
+                    isUpKeyPressed = false;
+                }
+
+                if (keyEvent.getCode() == KeyCode.DOWN) {
+                    isDownKeyPressed = false;
+                }
+
 
             }
         });
