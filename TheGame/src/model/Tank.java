@@ -1,9 +1,9 @@
 package model;
 
 public enum Tank {
-    BLUE("Assets/resources/BlueBody.png", "Assets/resources/BlueBarrel.png", "BLUE", "Assets/resources/TankBlue.png", "Assets/resources/BlueLabel.png","Assets/resources/bulletBlueSilver_outline.png"),
-    BLACK("Assets/resources/BlackBody.png", "Assets/resources/BlackBarrel.png", "BLACK", "Assets/resources/TankBlack.png", "Assets/resources/BlackLabel.png","Assets/resources/bulletBeigeSilver_outline.png"),
-    RED("Assets/resources/RedBody.png", "Assets/resources/RedBarrel.png", "RED", "Assets/resources/TankRed.png", "Assets/resources/RedLabel.png","Assets/resources/bulletRedSilver_outline.png");
+    BLUE("assets/resources/BlueBody.png", "assets/resources/BlueBarrel.png", "BLUE", "assets/resources/TankBlue.png", "assets/resources/BlueLabel.png", "assets/resources/bulletBlueSilver_outline.png"),
+    BLACK("assets/resources/BlackBody.png", "assets/resources/BlackBarrel.png", "BLACK", "assets/resources/TankBlack.png", "assets/resources/BlackLabel.png", "assets/resources/bulletBeigeSilver_outline.png"),
+    RED("assets/resources/RedBody.png", "assets/resources/RedBarrel.png", "RED", "assets/resources/TankRed.png", "assets/resources/RedLabel.png", "assets/resources/bulletRedSilver_outline.png");
     private String bodyPath;
     private String barrelPath;
     private String tankLogo;

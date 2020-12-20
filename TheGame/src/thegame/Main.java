@@ -1,10 +1,9 @@
 package thegame;
 
 import javafx.application.Application;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import view.GameScreen;
-import view.MainScreen;
+import controller.GameScreen;
+import controller.MainScreen;
 
 public class Main extends Application {
 
@@ -14,6 +13,7 @@ public class Main extends Application {
         MainScreen mainS = new MainScreen();
         GameScreen gameS = new GameScreen();
         primaryStage = mainS.getMainStage();
+        primaryStage.setTitle("TANK");
         primaryStage.setResizable(false);
         primaryStage.show();
     }

@@ -16,10 +16,12 @@ import javafx.util.Duration;
 import model.InfoLabel;
 import model.Tank;
 import model.TankChooser;
-import view.GameScreen;
+import controller.GameScreen;
 
 import javax.sound.sampled.DataLine.Info;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,8 +54,12 @@ public class SelectScene extends SubScene {
     }
 
     private void createBackGround() {
-        String localURL = filePanel.toURI().toString();
-        Image img = new Image(localURL, WIDTH, HEIGHT, false, false);
+        Image img = null;
+        try {
+            img = new Image(new FileInputStream("src/Assets/mainScreenAssets/ChooseTank.png"), WIDTH, HEIGHT, false, false);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         BackgroundImage view = new BackgroundImage(img, null, null, BackgroundPosition.DEFAULT, null);
         subRoot.setBackground(new Background(view));
     }
@@ -104,7 +110,11 @@ public class SelectScene extends SubScene {
             public void handle(MouseEvent event) {
                 isPlay = true;
                 GameScreen gameManager = new GameScreen();
-                gameManager.createNewGame(mainStage,getChoosenTank());
+                try {
+                    gameManager.createNewGame(mainStage,getChoosenTank());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         });
         subRoot.getChildren().add(playLabel);

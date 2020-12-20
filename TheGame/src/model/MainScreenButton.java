@@ -3,8 +3,6 @@ package model;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -12,11 +10,10 @@ import javafx.scene.text.Font;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 
 public class MainScreenButton extends Button {
     private String fontPath = "src/Assets/fonts/GAMERIA.ttf";
-    private static final String buttonPath = "Assets/mainScreenAssets/mainScreenButton.png";
+    private static final String buttonPath = "assets/mainScreenAssets/mainScreenButton.png";
     private boolean isPress = false;
     private static final int WIDTH = 250;
     private static final int HEIGHT = 64;
