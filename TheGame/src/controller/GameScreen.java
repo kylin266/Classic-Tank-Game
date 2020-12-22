@@ -752,6 +752,7 @@ public class GameScreen {
                         createEnemyBullet(enemy2);
             }
         }
+        // KILL REMAINING BULLET
         gamePane.getChildren().removeIf(n -> {
             if (n.getClass().getName().equals("model.Bullet")) {
                 Bullet s = (Bullet) n;

@@ -62,18 +62,24 @@ public class Bullet extends ImageView {
 
     public void moveLeft() {
         setTranslateX(getTranslateX() - speed);
+        if (getTranslateX() < 0) setDead();
     }
 
     public void moveRight() {
         setTranslateX(getTranslateX() + speed);
+        if (getTranslateX() > 1320) setDead();
+
     }
 
     public void moveUp() {
         setTranslateY(getTranslateY() - speed);
+        if (getTranslateY() < 0) setDead();
     }
 
     public void moveDown() {
         setTranslateY(getTranslateY() + speed);
+        if (getTranslateY() > 734) setDead();
+
     }
 
     public void checkCollision(Obstacle model) {
