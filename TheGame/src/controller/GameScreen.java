@@ -209,7 +209,6 @@ public class GameScreen {
                 try {
 
                     enemy1 = new Obstacle(new Image(new FileInputStream("src/assets/obstacle/enemy1.png")), rand_x, rand_y, "enemy", angle, 3);
-                    board = enemy1.setFillBoard(board);
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 }
@@ -224,7 +223,6 @@ public class GameScreen {
             if (board[rand_y][rand_x] == 1 && board[rand_y + 76][rand_x + 70] == 1 && board[rand_y][rand_x + 70] == 1 && board[rand_y + 76][rand_x] == 1 && rand_x != pos_x && rand_y != pos_y) {
                 try {
                     enemy2 = new Obstacle(new Image(new FileInputStream("src/assets/obstacle/enemy2.png")), rand_x, rand_y, "enemy", angle, 3);
-                    board = enemy1.setFillBoard(board);
 
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
@@ -569,16 +567,16 @@ public class GameScreen {
                         if (s != null && enemy1 != null) {
                             s.checkCollision(enemy1);
                             if (enemy1.getIsDead()) {
-                                gamePane.getChildren().remove(enemy1);
                                 board = enemy1.setClearBoard(board);
+                                gamePane.getChildren().remove(enemy1);
                                 enemy1 = null;
                             }
                         }
                         if (s != null && enemy2 != null) {
                             s.checkCollision(enemy2);
                             if (enemy2.getIsDead()) {
-                                gamePane.getChildren().remove(enemy2);
                                 board = enemy2.setClearBoard(board);
+                                gamePane.getChildren().remove(enemy2);
                                 enemy2 = null;
                             }
                         }
