@@ -5,16 +5,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class Player {
     private Tank tank;
     private int life = 3;
     private double pos_x = 100;
     private double pos_y = 100;
-    private ImageView tankImg;
+    private Image tankImg;
     private ImageView barrelImg;
+    private ImageView lifeImg;
     private Image bulletImg;
-    private int speed = 5;
+    private int speed = 4;
 
     public Player(Tank tank) {
         this.tank = tank;
@@ -28,12 +31,12 @@ public class Player {
         File body = new File(bodyPath);
         File barrel = new File(barrelPath);
         File bullet = new File(bulletPath);
-        tankImg = new ImageView(new Image(body.getPath(), 64, 64, false, false));
+        tankImg = new Image(body.getPath(), 64, 64, false, false);
         barrelImg = new ImageView(new Image(barrel.getPath(), 24, 58, false, false));
         bulletImg = new Image(bullet.getPath(), 15, 24, false, false);
     }
 
-    public ImageView getTankImg() {
+    public Image getTankImg() {
         return tankImg;
     }
 
@@ -41,6 +44,9 @@ public class Player {
         return barrelImg;
     }
 
+    public int getLife(){
+        return life;
+    }
     public static boolean checkCollision(Obstacle model, ImageView tankImg, double angle) {
         if (!tankImg.getBoundsInParent().intersects(model.getBoundsInParent())) {
             return false;

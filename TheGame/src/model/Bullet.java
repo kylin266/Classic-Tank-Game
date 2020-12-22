@@ -12,8 +12,8 @@ public class Bullet extends ImageView {
     private double x;
     private double y;
     public double angle = 0;
-
-    public Bullet(Image img, double x, double y, String type, double angle) {
+    private int speed;
+    public Bullet(Image img, double x, double y, String type, double angle, int speed) {
 
         super(img);
         setTranslateX(x);
@@ -22,6 +22,7 @@ public class Bullet extends ImageView {
         this.y = y;
         this.type = type;
         this.angle = angle;
+        this.speed = speed;
     }
 
     public Bullet(Image img, String type, double angle) {
@@ -60,19 +61,19 @@ public class Bullet extends ImageView {
     }
 
     public void moveLeft() {
-        setTranslateX(getTranslateX() - 5);
+        setTranslateX(getTranslateX() - speed);
     }
 
     public void moveRight() {
-        setTranslateX(getTranslateX() + 5);
+        setTranslateX(getTranslateX() + speed);
     }
 
     public void moveUp() {
-        setTranslateY(getTranslateY() - 5);
+        setTranslateY(getTranslateY() - speed);
     }
 
     public void moveDown() {
-        setTranslateY(getTranslateY() + 5);
+        setTranslateY(getTranslateY() + speed);
     }
 
     public void checkCollision(Obstacle model) {
